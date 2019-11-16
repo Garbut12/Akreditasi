@@ -4,9 +4,9 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-globe-asia"></i>
+                <i class="fab fa-steam"></i>
             </div>
             <div class="sidebar-brand-text mx-3">Akreditasi</div>
         </a>
@@ -46,8 +46,12 @@
         ?>
 
             <?php foreach ($subMenu as $sm) : ?>
+                <?php if ($title == $sm['title']) :               ?>
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
+                <li class="nav-item active">
+                    <?php else: ?>
+                <li class="nav-item ">
+                    <?php endif; ?>
                     <a class="nav-link" href="<?= base_url($sm['url']); ?>">
                         <i class="<?= $sm['icon']; ?>"></i>
                         <span><?= $sm['title'] ;?></span></a>
