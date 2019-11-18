@@ -44,7 +44,8 @@
                         <td><?= $sm['is_active']; ?></td>
                         <td>
                             <a href=""class="badge badge-pill badge-success">edit</a>
-                            <a href=""class="badge badge-pill badge-danger">delete</a>
+                            <a href="<?= base_url('menu/submenu/' . $sm['id']) ;?>"class="badge badge-pill badge-danger" >delete</a>
+                            <a href="<?= base_url('menu/submenu/' . $sm['id']); ?>" class="btn btn-danger btn-circle" data-toggle="tooltip" data-placement="top" title="Hapus" onclick="return confirm('Yakin Hapus?')">
                         </td>
                     </tr>
                     <?php $i++ ;?>

@@ -11,6 +11,11 @@
 
         public function index()
         {
+
+            if ($this->session->userdata('email')) {
+                redirect('user');
+            }
+
             $this->form_validation->set_rules('email','Email', 'trim|required|valid_email');
             $this->form_validation->set_rules('password','Password', 'trim|required');
             if ($this->form_validation->run() == false) {
@@ -26,6 +31,7 @@
 
         private function _login()
         {
+
             $email = $this->input->post('email');
             $password = $this->input->post('password');
 
@@ -79,6 +85,10 @@
         public function registration()
         {
 
+            if ($this->session->userdata('email')) {
+                redirect('user');
+            }
+
             $this->form_validation->set_rules('name', 'Name', 'required|trim');
             $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]',array(
                 'is_unique' => 'this email has already registered'
@@ -127,5 +137,11 @@
                           You have been logged out !!
                      </div>');
             redirect('auth');
+        }
+
+
+        public function block()
+        {
+            $this->load->view('auth/bloked');
         }
     }

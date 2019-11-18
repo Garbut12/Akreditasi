@@ -33,7 +33,7 @@
                             <th scope="row"><?= $i ;?></th>
                             <td><?= $m['menu']; ?></td>
                             <td>
-                                <a href=""class="badge badge-pill badge-success">edit</a>
+                                <a href=""class="badge badge-pill badge-success"<?= base_url('menu/') . $i['id']; ?>>edit</a>
                                 <a href=""class="badge badge-pill badge-danger">delete</a>
                             </td>
                         </tr>
