@@ -6,7 +6,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this->load->library('upload');
+
             is_logged_in();
         }
 
@@ -25,7 +25,7 @@
         public function edit()
         {
             $data['title'] = 'Edit Profile';
-            $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
             $this->form_validation->set_rules('name', 'Full Name', 'required|trim');
 
@@ -35,38 +35,29 @@
                 $this->load->view('templates/topbar', $data);
                 $this->load->view('user/edit', $data);
                 $this->load->view('templates/footer');
-
             } else {
                 $name = $this->input->post('name');
                 $email = $this->input->post('email');
 
-                // jika ada gambar yang di upload
+                // cek jika ada gambar yang akan diupload
                 $upload_image = $_FILES['image']['name'];
 
-//                $tes = $this->upload->do_upload('image');
-//                var_dump($tes);
-//                die();
-
                 if ($upload_image) {
-
-                    $config['allowed_types'] = 'gif|jpg|png';
-                    $config['max_size']     = '2048';
+                    $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                    $config['max_size']      = '2048';
                     $config['upload_path'] = './assets/img/profile/';
 
                     $this->load->library('upload', $config);
 
-                    // proses upload
-                    if(!$this->upload->do_upload('image')){
-//                        $old_image = $data['user']['image'];
-
-//                        if($old_image != 'default.jpg'){
-//                            unlink(FCPATH . 'assets/img/profile/' . $old_image);
-//                        }
+                    if ($this->upload->do_upload('image')) {
+                        $old_image = $data['user']['image'];
+                        if ($old_image != 'default.png') {
+                            unlink(FCPATH . 'assets/img/profile/' . $old_image);
+                        }
                         $new_image = $this->upload->data('file_name');
                         $this->db->set('image', $new_image);
-
                     } else {
-                        echo $this->upload->display_errors();
+                        echo $this->upload->dispay_errors();
                     }
                 }
 
@@ -74,10 +65,7 @@
                 $this->db->where('email', $email);
                 $this->db->update('user');
 
-                $this->session->set_flashdata('message',
-                    '<div class="alert alert-success" role="alert">
-                          Your profile has been update
-                     </div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated!</div>');
                 redirect('user');
             }
         }
