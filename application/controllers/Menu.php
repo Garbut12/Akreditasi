@@ -41,7 +41,7 @@
 
         public function submenu()
         {
-            $data['title'] = 'SubMenu Management';
+            $data['title'] = 'Submenu Management';
             $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
             $this->load->model('menu_model', 'menu');
             $data['subMenu'] = $this->menu->getSubMenu();

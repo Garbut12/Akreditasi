@@ -3,10 +3,9 @@
 
     class Asesor_model extends CI_Model
     {
-        public function getAsesor()
-        {
-            $query = "SELECT * FROM `asesor` ";
-            return $this->db->query($query)->result_array();
+        public function getAsesor(){
+            $query = $this->db->get('asesor');
+            return $query->result_array();
         }
 
         public function AddAsesor()
@@ -43,35 +42,14 @@
             return ($this->db->affected_rows() != 1) ? false : true;
         }
 
-        public function getAsesorB()
+        public function searchAsesor($keyword)
         {
-            $query = "SELECT * FROM `asesor_B` ";
-            return $this->db->query($query)->result_array();
-        }
+            $this->db->SELECT('*');
+            $this->db->FROM('asesor');
+            $this->db->LIKE('name', $keyword);
 
-        public function addAsesorB($data)
-        {
-            $this->db->insert('asesor_B', $data);
-            return ($this->db->affected_rows() != 1) ? false : true;
-
-        }
-
-        public function editAsesorB($id,$data)
-        {
-            $this->db->where('id', $id);
-            $this->db->update('asesor_B', $data);
-        }
-
-        public function getDetailAsesorB($id)
-        {
-            $query = "SELECT * FROM `asesor_B` WHERE `id` = $id";
-            return $this->db->query($query)->row_array();
-        }
-
-        public function deleteAsesorB($id)
-        {
-            $this->db->delete('asesor_B', array('id'=> $id));
-            return ($this->db->affected_rows() != 1) ? false : true;
+            $data = $this->db->get();
+            return $data->result_array();
         }
 
     }

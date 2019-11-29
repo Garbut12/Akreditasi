@@ -19,7 +19,7 @@
 
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <?= form_open_multipart('asesor/editAsesor/' . $asesor['id']); ?>
+                        <?= form_open_multipart('asesor/editasesor/' . $asesor['id']); ?>
                         <div class="form-group row">
                             <label for="nia" class="col-sm-3 col-form-label">NIA</label>
                             <div class="col-sm-9">
@@ -72,7 +72,7 @@
                             <div class="col-sm-9">
                                 <select type="text" class="form-control" id="status_penugasan" name="status_penugasan"
                                 <?php
-                                $status_penugasan = array('bisa ditugaskan','tidak bisa ditugaskan');
+                                $status_penugasan = array('bisa ditugaskan','tidak bisa ditugaskan','skor');
                                 ?>
                                 <select type="text" class="form-control" id="rumpun" name="rumpun">
                                     <?= '<option value="'.$asesor['status_penugasan'].'">'. $asesor['status_penugasan'].' </option>'; ?>
