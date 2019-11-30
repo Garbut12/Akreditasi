@@ -17,7 +17,16 @@
 
 
                 <?= $this->session->flashdata('message') ;?>
+
+                <?php
+                if ($this->session->userdata('role_id') == 1) {
+                ?>
+
                 <a href="<?= base_url('asesor/addasesor'); ?>" class="btn btn-primary mb-3 " >Add New Asesor </a>
+
+                    <?php
+                }
+                ?>
 
                 <div class="row mt-2">
                     <div class="col-6">
@@ -44,8 +53,13 @@
                         <th scope="col">Rumpun</th>
                         <th scope="col">Kab/Kota</th>
                         <th scope="col">Status</th>
+                        <?php
+                        if ($this->session->userdata('role_id') == 1) {
+                        ?>
                         <th scope="col">Action</th>
-
+                            <?php
+                        }
+                        ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,23 +72,18 @@
                             <td><?= $a['rumpun']; ?></td>
                             <td><?= $a['kab_kota']; ?></td>
                             <td><?= $a['status_penugasan']; ?></td>
-<!--                            <td>-->
-<!--                                --><?php
-//                                if($a['status_penugasan'] == '1'){
-//                                    ?><!-- <a href="--><?//= base_url('asesor/asesorA' . $a['id']) ;?><!--"class="badge badge-pill badge-success"><i class="fas fa-check"></i> bisa ditugaskan</a>--><?php
-//
-//                                }else{
-//                                    ?><!-- <a href="--><?//= base_url('asesor/asesorA' . $a['id']) ;?><!--"class="badge badge-pill badge-success"><i class="fas fa-check"></i> tidak bisa ditugaskan</a>--><?php
-//                                }
-//
-//                                ?>
-<!--                            </td>-->
 
 
+                            <?php
+                            if ($this->session->userdata('role_id') == 1) {
+                            ?>
                             <td>
                                 <a href="<?= base_url('asesor/editasesor/' . $a['id']) ;?>"class="badge badge-pill badge-success">edit</a>
                                 <a href="<?= base_url('asesor/deleteAsesor/' . $a['id']) ;?>"class="badge badge-pill badge-danger" onclick="return confirm('Yakin Hapus?')">delete</a>
                             </td>
+                                <?php
+                            }
+                            ?>
                         </tr>
                         <?php $i++ ;?>
                     <?php endforeach; ?>

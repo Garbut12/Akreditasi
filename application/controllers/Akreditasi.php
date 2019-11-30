@@ -78,7 +78,9 @@ class Akreditasi extends CI_Controller
         $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
         $data['akreditasi'] = $this->akm->getDetailTahun($id);
 
-        $this->form_validation->set_rules('tahun', 'tahun', 'trim|required');
+        $this->form_validation->set_rules('tahun', 'tahun', 'trim|required|is_unique[tahun_valid.tahun]',
+            array(
+                'is_unique' => 'this Tahun has already registered'));
 
         if ($this->form_validation->run()==false) {
             $this->load->view('templates/header', $data);
@@ -89,8 +91,6 @@ class Akreditasi extends CI_Controller
         }else{
             $tahun = $this->input->post('tahun');
 
-
-
             $data = array(
                 'tahun' => $tahun
             );
@@ -98,7 +98,7 @@ class Akreditasi extends CI_Controller
             $this->akm->edittahun($id,$data);
             $this->session->set_flashdata('message',
                 '<div class="alert alert-success" role="alert">
-                              Data Asesor Has Been Update
+                              Data Years Has Been Update
                          </div>');
             redirect('akreditasi/index');
         }
@@ -122,6 +122,11 @@ class Akreditasi extends CI_Controller
 
         $data['akreditasi']=  $this->akm->validasi($id);
 
+        $datasession = array(
+            'id' => $id
+        );
+        $this->session->set_userdata($datasession);
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -129,15 +134,18 @@ class Akreditasi extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function addvalidasi($id)
+    public function addvalidasi()
     {
         $data['title']= 'Add  Validasi';
         $data['user'] =$data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
-        $data['akreditasi']=  $this->akm->validasi($id);
 
-        $this->form_validation->set_rules('validasi', 'validasi', 'trim|required|is_unique[validasi.validasi]',
-            array(
-                'is_unique' => 'this valid has already registered'));
+        $sessionid = $this->session->userdata('id');
+
+        $this->form_validation->set_rules('validasi', 'validasi', 'trim|required');
+        $this->form_validation->set_rules('tahun_id', 'tahun_id', 'trim|required');
+        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
+        $this->form_validation->set_rules('file_valid', 'file_valid', 'trim|required');
+
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -153,6 +161,8 @@ class Akreditasi extends CI_Controller
                 'file_valid' => $this->input->post('file_valid')
             ];
 
+
+
             $data2 = $this->akm->valid();
             $berbeda = true;
             foreach ($data2 as $daB) {
@@ -163,20 +173,71 @@ class Akreditasi extends CI_Controller
             }
             if ($berbeda) {
                 if ($this->akm->addvalidasi($data)) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil menyimpan data Asesor</div>');
-                    redirect('akreditasi/viewvalidasi');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Berhasil menyimpan data validasi</div>');
+                    redirect('akreditasi/viewvalidasi/'.$sessionid);
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi kesalahan, gagal menyimpan data asesor</div>');
-                    redirect('akreditasi/viewvalidasi');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Terjadi kesalahan, gagal menyimpan data validasi</div>');
+                    redirect('akreditasi/viewvalidasi/'.$sessionid);
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal menambahkan, asesor dengan data yang sama sudah tersimpan</div>');
-                redirect('akreditasi/viewvalidasi');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal menambahkan, validasi dengan data yang sama sudah </div>');
+                redirect('akreditasi/viewvalidasi/'.$sessionid);
             }
         }
 
     }
 
+    public function editvalidasi($id)
+    {
+        $data['title'] = 'Edit Validasi';
+        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['validasi'] = $this->akm->getdetailvalid($id);
+        $sessionid = $this->session->userdata('id');
+
+        $this->form_validation->set_rules('validasi', 'validasi', 'trim|required');
+        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
+        $this->form_validation->set_rules('file_valid', 'file_valid', 'trim|required');
+
+
+        if ($this->form_validation->run()==false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('akreditasi/editvalidasi', $data);
+            $this->load->view('templates/footer');
+        }else{
+            $validasi = $this->input->post('validasi');
+            $keterangan = $this->input->post('keterangan');
+            $file = $this->input->post('file_valid');
+
+            $data = array(
+                'validasi' => $validasi,
+                'keterangan' => $keterangan,
+                'file_valid' => $file
+            );
+
+            $this->akm->editvalidasi($id,$data);
+            $this->session->set_flashdata('message',
+                '<div class="alert alert-success" role="alert">
+                              Data Validasi Has Been Update
+                         </div>');
+            redirect('akreditasi/viewvalidasi/'. $sessionid);
+        }
+    }
+
+
+
+    public function deleteValidasi($id)
+    {
+        $sessionid = $this->session->userdata('id');
+        if ($this->akm->deleteValidasi($id)) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Succes delete data valid</div>');
+            redirect('akreditasi/viewvalidasi/'. $sessionid);
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to delete data validasi</div>');
+            redirect('akreditasi/viewvalidasi/'. $sessionid);
+        }
+    }
 
     public function hasilakreditasi()
     {

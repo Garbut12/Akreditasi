@@ -9,7 +9,7 @@
 
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg  ">
             <?= form_error('akreditasi','
                         <div class="alert alert-danger" role="alert">',
                 '</div>');?>
@@ -17,8 +17,16 @@
 
 
             <?= $this->session->flashdata('message') ;?>
+
+            <?php
+            if ($this->session->userdata('role_id') == 1) {
+            ?>
+
             <a href="<?= base_url('akreditasi/addtahun'); ?>" class="btn btn-primary mb-3 " >+Tahun Akreditasi </a>
 
+                <?php
+            }
+            ?>
 
 
             <table class="table table-hover">
@@ -37,29 +45,18 @@
                         <th scope="row"><?= $i ;?></th>
 <!--                        <td>--><?//= $a['tahun_valid']; ?><!--</td>-->
                         <td><?= $tv['tahun']; ?></td>
-<!--                        <td>--><?//= $a['rumpun']; ?><!--</td>-->
-<!--                        <td>--><?//= $a['kab_kota']; ?><!--</td>-->
-<!--                        <td>--><?//= $a['status_penugasan']; ?><!--</td>-->
-                        <!--                            <td>-->
-                        <!--                                --><?php
-                        //                                if($a['status_penugasan'] == '1'){
-                        //                                    ?><!-- <a href="--><?//= base_url('asesor/asesorA' . $a['id']) ;?><!--"class="badge badge-pill badge-success"><i class="fas fa-check"></i> bisa ditugaskan</a>--><?php
-                        //
-                        //                                }else{
-                        //                                    ?><!-- <a href="--><?//= base_url('asesor/asesorA' . $a['id']) ;?><!--"class="badge badge-pill badge-success"><i class="fas fa-check"></i> tidak bisa ditugaskan</a>--><?php
-                        //                                }
-                        //
-                        //                                ?>
-                        <!--                            </td>-->
-
-
                         <td>
                             <a href="<?= base_url('akreditasi/viewvalidasi/' . $tv['id']) ;?>"class="badge badge-pill badge-warning">view</a>
+
+                            <?php
+                            if ($this->session->userdata('role_id') == 1) {
+                            ?>
                             <a href="<?= base_url('akreditasi/edittahun/' . $tv['id']) ;?>"class="badge badge-pill badge-success">edit</a>
                             <a href="<?= base_url('akreditasi/deleteTahun/' . $tv['id']) ;?>"class="badge badge-pill badge-danger" onclick="return confirm('Yakin Hapus?')">delete</a>
-<!--                            <a href="--><?//= base_url('asesor/editasesor/' ) ;?><!--"class="badge badge-pill badge-success">edit</a>-->
-<!--                            <a href="--><?//= base_url('asesor/editasesor/' ) ;?><!--"class="badge badge-pill badge-success">view</a>-->
-<!--                            <a href="--><?//= base_url('asesor/deleteAsesor/') ;?><!--"class="badge badge-pill badge-danger" onclick="return confirm('Yakin Hapus?')">delete</a>-->
+                                <?php
+                            }
+                            ?>
+
                         </td>
                     </tr>
                     <?php $i++ ;?>

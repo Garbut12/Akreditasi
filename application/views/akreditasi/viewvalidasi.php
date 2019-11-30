@@ -38,29 +38,22 @@
                 <tr>
                     <th scope="row"><?= $i ;?></th>
                     <td><?= $v['validasi']; ?></td>
-                    <!--                        <td>--><?//= $a['tahun_valid']; ?><!--</td>-->
-                    <!--                        <td>--><?//= $a['nama']; ?><!--</td>-->
-                    <!--                        <td>--><?//= $a['rumpun']; ?><!--</td>-->
-                    <!--                        <td>--><?//= $a['kab_kota']; ?><!--</td>-->
-                    <!--                        <td>--><?//= $a['status_penugasan']; ?><!--</td>-->
-                    <!--                            <td>-->
-                    <!--                                --><?php
-                    //                                if($a['status_penugasan'] == '1'){
-                    //                                    ?><!-- <a href="--><?//= base_url('asesor/asesorA' . $a['id']) ;?><!--"class="badge badge-pill badge-success"><i class="fas fa-check"></i> bisa ditugaskan</a>--><?php
-                    //
-                    //                                }else{
-                    //                                    ?><!-- <a href="--><?//= base_url('asesor/asesorA' . $a['id']) ;?><!--"class="badge badge-pill badge-success"><i class="fas fa-check"></i> tidak bisa ditugaskan</a>--><?php
-                    //                                }
-                    //
-                    //                                ?>
-                    <!--                            </td>-->
                     <td><?= $v['keterangan']; ?></td>
                     <td><?= $v['file_valid']; ?>
+
+                        <a href="" class="badge badge-pill badge-primary">download</a>
                     </td>
                     <td>
-                        <a href="<?= base_url('akreditasi/hasilakreditasi/') ;?>"class="badge badge-pill badge-warning">view</a>
-                        <a href=""class="badge badge-pill badge-success">edit</a>
-                        <a href=""class="badge badge-pill badge-danger">delete</a>
+                        <a href="<?= base_url('akreditasi/hasilakreditasi') ;?>"class="badge badge-pill badge-warning">view</a>
+                        <?php
+                        if ($this->session->userdata('role_id') == 1) {
+                            ?>
+
+                        <a href="<?= base_url('akreditasi/editvalidasi/' . $v['id']) ;?>"class="badge badge-pill badge-success">edit</a>
+                        <a href="<?= base_url('akreditasi/deleteValidasi/' . $v['id']) ;?>"class="badge badge-pill badge-danger"onclick="return confirm('Yakin Hapus?')">delete</a>
+                            <?php
+                        }
+                        ?>
                     </td>
                 </tr>
                                     <?php $i++ ;?>
