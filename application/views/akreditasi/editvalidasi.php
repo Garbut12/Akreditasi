@@ -29,20 +29,21 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
+                            <label for="no_sk" class="col-sm-3 col-form-label">NO SK</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="keterangan" name="keterangan"
-                                       value="<?= $validasi['keterangan']; ?>">
+                                <input type="text" class="form-control" id="no_sk" name="no_sk"
+                                       value="<?= $validasi['no_sk']; ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="file_valid" class="col-sm-3 col-form-label">File valid</label>
+                            <label for="tgl_valid" class="col-sm-3 col-form-label">Tanggal Valid</label>
                             <div class="col-sm-9">
-                                <input type="file"   id="file_valid" name="file_valid"
-                                       value="<?= $validasi['file_valid']; ?>">
+                                <input type="date" class="form-control" id="tgl_valid" name="tgl_valid"
+                                       value="<?= $validasi['tgl_valid']; ?>">
                             </div>
                         </div>
+
 
                         <div class="from-group row justify-content-end	">
                             <div class="col-sm-7">

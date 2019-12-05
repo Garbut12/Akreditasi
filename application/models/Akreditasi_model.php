@@ -19,6 +19,32 @@ class Akreditasi_model extends CI_Model
         $this->db->insert('tahun_valid', $data);
         return ($this->db->affected_rows() != 1) ? false : true;
     }
+//    // Fungsi untuk melakukan proses upload file
+//    public function upload_file($filename){
+//        $this->load->library('upload'); // Load librari upload
+//
+//        $config['upload_path'] = './excel/';
+//        $config['allowed_types'] = 'xlsx';
+//        $config['max_size']	= '2048';
+//        $config['overwrite'] = true;
+//        $config['file_name'] = $filename;
+//
+//        $this->upload->initialize($config); // Load konfigurasi uploadnya
+//        if($this->upload->do_upload('file_valid')){ // Lakukan upload dan Cek jika proses upload berhasil
+//            // Jika berhasil :
+//            $return = array('result' => 'success', 'file_valid' => $this->upload->data(), 'error' => '');
+//            return $return;
+//        }else{
+//            // Jika gagal :
+//            $return = array('result' => 'failed', 'file_valid' => '', 'error' => $this->upload->display_errors());
+//            return $return;
+//        }
+//    }
+
+    // Buat sebuah fungsi untuk melakukan insert lebih dari 1 data
+    public function insert_multiple($data){
+        $this->db->insert_batch('akreditasi', $data);
+    }
 
     public function editTahun($id,$data)
     {

@@ -75,6 +75,7 @@ class Asesor extends CI_Controller
         $this->form_validation->set_rules('rumpun', 'rumpun', 'trim|required');
         $this->form_validation->set_rules('kab_kota', 'kab_kota', 'trim|required');
         $this->form_validation->set_rules('status_penugasan', 'status_penugasan', 'trim|required');
+        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -88,7 +89,8 @@ class Asesor extends CI_Controller
                 'nama' =>htmlspecialchars($this->input->post('nama')),
                 'rumpun' => htmlspecialchars($this->input->post('rumpun')),
                 'kab_kota' => htmlspecialchars($this->input->post('kab_kota')),
-                'status_penugasan' => htmlspecialchars($this->input->post('status_penugasan'))
+                'status_penugasan' => htmlspecialchars($this->input->post('status_penugasan')),
+                'keterangan' => htmlspecialchars($this->input->post('keterangan'))
             ];
 
             $data2 = $this->am->getAsesor();
@@ -126,6 +128,7 @@ class Asesor extends CI_Controller
         $this->form_validation->set_rules('rumpun', 'rumpun', 'trim|required');
         $this->form_validation->set_rules('kab_kota', 'kab_kota', 'trim|required');
         $this->form_validation->set_rules('status_penugasan', 'status_penugasan', 'trim|required');
+        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 
         if ($this->form_validation->run()==false) {
             $this->load->view('templates/header', $data);
@@ -139,6 +142,7 @@ class Asesor extends CI_Controller
             $rumpun = $this->input->post('rumpun');
             $kab_kota = $this->input->post('kab_kota');
             $status_penugasan = $this->input->post('status_penugasan');
+            $keterangan = $this->input->post('keterangan');
 
 
             $data = array(
@@ -146,7 +150,9 @@ class Asesor extends CI_Controller
                 'nama' => $nama,
                 'rumpun' => $rumpun,
                 'kab_kota' => $kab_kota,
-                'status_penugasan' => $status_penugasan
+                'status_penugasan' => $status_penugasan,
+                'keterangan' => $keterangan
+
             );
 
             $this->am->editAsesor($id,$data);

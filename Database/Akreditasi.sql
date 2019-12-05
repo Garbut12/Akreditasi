@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 27, 2019 at 10:05 AM
+-- Generation Time: Nov 30, 2019 at 05:54 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -59,7 +59,6 @@ CREATE TABLE `asesor` (
 
 INSERT INTO `asesor` (`id`, `nia`, `nama`, `rumpun`, `kab_kota`, `status_penugasan`) VALUES
 (4, 1408201910120020, 'Ayu Rahayu', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(5, 1408201910120014, 'Elfa Nengsih', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (6, 1408201910120017, 'Ervina', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (7, 1408201910120016, 'Frasanti Sundari', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (8, 1408201910120018, 'Gusmayenti', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
@@ -68,12 +67,29 @@ INSERT INTO `asesor` (`id`, `nia`, `nama`, `rumpun`, `kab_kota`, `status_penugas
 (11, 1408201910110001, 'Khairul Khazam', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (12, 1305201710123100, 'Nova Wahyuni, S.Pd.', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (13, 1408201610121596, 'Nurhaida Selian, M.Pd', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(14, 1408201910120015, 'Santi Arah, S.Pd.I', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (15, 1408201710122897, 'Sri Wahyuni, M.Pd.', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (16, 1408201910120019, 'Syafrida', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
 (17, 1408201610121593, 'Terry Eky Yosinda, S.Si', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(18, 1408201910310001, 'Rahayudin Manurung', 'PKBM', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(19, 1408201910220005, 'Syerlie Annisa', 'LKP', 'Kab. Bengkalis', 'bisa ditugaskan');
+(18, 1408201910310001, 'Rahayudin Manurung', 'PKBM', 'Kab. Bengkalis', 'bisa ditugaskan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tahun_valid`
+--
+
+CREATE TABLE `tahun_valid` (
+  `id` int(11) NOT NULL,
+  `tahun` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tahun_valid`
+--
+
+INSERT INTO `tahun_valid` (`id`, `tahun`) VALUES
+(4, '2016'),
+(8, '2017');
 
 -- --------------------------------------------------------
 
@@ -98,7 +114,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
 (5, 'Muhammad Ardhiyansyah', 'muhammadardhiyansyah16@gmail.com', 'LINE_1460209483639.jpg', '$2y$10$fAzF148fJZcNSD/CuN193.f8WC7Fkp.tRyD5DnMpEEK6iWyDjlBA.', 1, 1, 1573723351),
-(6, 'Reza Furnama', 'keriting@gmail.com', 'default.jpg', '$2y$10$lfEXyrw5IVtZKo5Qiqozj.hwd7YSWcTmmZPbFTQqsaeuO0GANeyme', 2, 1, 1573786022),
+(6, 'Reza Furnama', 'keriting@gmail.com', 'download.jpeg', '$2y$10$lfEXyrw5IVtZKo5Qiqozj.hwd7YSWcTmmZPbFTQqsaeuO0GANeyme', 2, 1, 1573786022),
 (9, 'kurniado', 'kurniado@gmail.com', '3.jpg', '$2y$10$oMvVLv0D2q2PmbPdUI6zWelfjKy.Ua/7D4A1yU578LrUU1j7N.Uw2', 2, 1, 1574352012);
 
 -- --------------------------------------------------------
@@ -126,7 +142,9 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (19, 2, 5),
 (20, 2, 4),
 (22, 1, 6),
-(23, 1, 7);
+(23, 1, 7),
+(24, 2, 6),
+(25, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -209,10 +227,20 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 CREATE TABLE `validasi` (
   `id` int(11) NOT NULL,
   `validasi` varchar(128) NOT NULL,
-  `tahun_valid` varchar(128) NOT NULL,
+  `tahun_id` varchar(128) NOT NULL,
   `keterangan` varchar(128) NOT NULL,
   `file_valid` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `validasi`
+--
+
+INSERT INTO `validasi` (`id`, `validasi`, `tahun_id`, `keterangan`, `file_valid`) VALUES
+(1, 'validasi 1', '4', 'SK 123', ''),
+(9, 'validasi 2', '4', 'sk 124', ''),
+(20, 'validasi 3', '4', 'sk 125', ''),
+(23, 'validasi 1', '8', 'sk', 'file');
 
 --
 -- Indexes for dumped tables
@@ -228,6 +256,12 @@ ALTER TABLE `akreditasi`
 -- Indexes for table `asesor`
 --
 ALTER TABLE `asesor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tahun_valid`
+--
+ALTER TABLE `tahun_valid`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -280,7 +314,13 @@ ALTER TABLE `akreditasi`
 -- AUTO_INCREMENT for table `asesor`
 --
 ALTER TABLE `asesor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `tahun_valid`
+--
+ALTER TABLE `tahun_valid`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -292,7 +332,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -316,7 +356,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `validasi`
 --
 ALTER TABLE `validasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

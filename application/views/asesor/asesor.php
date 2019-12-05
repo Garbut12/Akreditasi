@@ -28,13 +28,10 @@
                 }
                 ?>
 
-                <div class="row mt-2">
-                    <div class="col-6">
+                <div class="fa-pull-right">
+                    <div class="col">
                         <form action="http://localhost/Akreditasi/asesor/searchAsesor" method="post">
                             <div class="input-group">
-                                <div class="input-group-prepend bg-light">
-                                    <label class="input-group-text bg-light font-weight-light small" for="asesor">Cari Asesor</label>
-                                </div>
                                 <input name="keywordNama" id="keywordNama" autocomplete="off" type="text" class="w-50 form-control" placeholder="Cari Nama Asesor" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit" id="tombolCariAsesor">Cari</button>
@@ -53,6 +50,7 @@
                         <th scope="col">Rumpun</th>
                         <th scope="col">Kab/Kota</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Keterangan</th>
                         <?php
                         if ($this->session->userdata('role_id') == 1) {
                         ?>
@@ -72,6 +70,7 @@
                             <td><?= $a['rumpun']; ?></td>
                             <td><?= $a['kab_kota']; ?></td>
                             <td><?= $a['status_penugasan']; ?></td>
+                            <td><?= $a['keterangan']; ?></td>
 
 
                             <?php
@@ -79,7 +78,7 @@
                             ?>
                             <td>
                                 <a href="<?= base_url('asesor/editasesor/' . $a['id']) ;?>"class="badge badge-pill badge-success">edit</a>
-                                <a href="<?= base_url('asesor/deleteAsesor/' . $a['id']) ;?>"class="badge badge-pill badge-danger" onclick="return confirm('Yakin Hapus?')">delete</a>
+                                <a href="<?= base_url('asesor/deleteAsesor/' . $a['id']) ;?>"class="badge badge-pill badge-danger" onclick="return confirm('Apakah Yakin Hapus Data?')">delete</a>
                             </td>
                                 <?php
                             }

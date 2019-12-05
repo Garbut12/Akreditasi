@@ -18,21 +18,33 @@
 
                 <?= $this->session->flashdata('message') ;?>
 
+
+
+
                 <div class="row mb-lg-2">
-                    <div class="col-6">
-                        <form action="http://localhost/Akreditasi/asesor/searchAsesor" method="post">
-                            <div class="input-group">
-                                <div class="input-group-prepend bg-light">
-                                    <label class="input-group-text bg-light font-weight-light small" for="asesor">Cari </label>
-                                </div>
-                                <input name="keywordNama" id="keywordNama" autocomplete="off" type="text" class="w-50 form-control" placeholder="Cari Lembaga" required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" id="tombolCariLembaga">Cari</button>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="col-4">
+                    <a href="" class="btn btn-info waves-effect waves-light btn-purple m-b-5" style="margin-left: 10px"> <i class="fa fa-upload m-r-10"></i> <span>import</span> </a>
+
+                    <a href="" class="btn btn-info waves-effect waves-light btn-purple m-b-5" style="margin-left: 10px"> <i class="fa fa-upload m-r-10"></i> <span>Download</span> </a>
                     </div>
+                    <div class="col-8">
+                    <div class="fa-pull-right">
+                        <div class="col-12">
+                            <form action="http://localhost/Akreditasi/asesor/searchAsesor" method="post">
+                                <div class="input-group">
+                                    <input name="keywordNama" id="keywordNama" autocomplete="off" type="text" class="w-50 form-control" placeholder="Cari Lembaga" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit" id="tombolCariLembaga">Cari</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+
                 </div>
+
+
 
 
 
@@ -51,80 +63,7 @@
                     <tbody>
                     <!--                --><?php //$i= 1; ?>
                     <!--                --><?php //foreach ($akreditasi as $a) :?>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>69906573</td>
 
-                        <td>TK AN NUR
-                        </td>
-                        <td>
-                            Taman Kanak- kanak
-
-                        </td>
-                        <td>
-                            Kab. Indragiri Hulu
-
-                        </td>
-
-                        <td>
-                            C
-
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>69945559
-                        </td>
-
-                        <td>KB NUR RAMADHANI
-
-                        </td>
-                        <td>
-                            Kelompok Bermain
-
-
-                        </td>
-                        <td>
-                            Kab. Bengkalis
-
-
-                        </td>
-
-                        <td>
-                            B
-
-
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>69982551
-                        </td>
-
-                        <td>TK FITRAH AL MUKARAMAH
-
-                        </td>
-                        <td>
-                            Taman Kanak- kanak
-
-
-                        </td>
-                        <td>
-                            Kab. Bengkalis
-
-
-                        </td>
-
-                        <td>
-                            B
-
-
-                        </td>
-                    </tr>
                     <!--                    --><?php //$i++ ;?>
                     <!--                --><?php //endforeach; ?>
                     </tbody>
@@ -135,6 +74,15 @@
                         <!--                    --><?php //echo $pagination; ?>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="row mb-lg-2">
+            <div class="col-6">
+                <a href="<?= base_url('akreditasi/viewvalidasi/'.$sessionid = $this->session->userdata('id'))?>"class=" btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50"><i class="fas fa-chevron-left"></i></span>
+                    <span class="text">Back</span>
+                </a>
             </div>
         </div>
 

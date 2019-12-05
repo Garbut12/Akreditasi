@@ -6,6 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Akreditasi extends CI_Controller
 {
+
+    private $filename = "import_data"; // Kita tentukan nama filenya
+
     public function __construct()
     {
         parent::__construct();
@@ -136,29 +139,57 @@ class Akreditasi extends CI_Controller
 
     public function addvalidasi()
     {
+
+
         $data['title']= 'Add  Validasi';
         $data['user'] =$data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+
+        $data['get_tahun'] = $this->akm->tahunValid();
 
         $sessionid = $this->session->userdata('id');
 
         $this->form_validation->set_rules('validasi', 'validasi', 'trim|required');
         $this->form_validation->set_rules('tahun_id', 'tahun_id', 'trim|required');
-        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
-        $this->form_validation->set_rules('file_valid', 'file_valid', 'trim|required');
+        $this->form_validation->set_rules('no_sk', 'no_sk', 'trim|required');
+        $this->form_validation->set_rules('tgl_valid', 'tgl_valid', 'trim|required');
+
 
 
         if ($this->form_validation->run() == false) {
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('akreditasi/addvalidasi', $data);
             $this->load->view('templates/footer');
+            $data = array(); // Buat variabel $data sebagai array
+//
+//            if(isset($_POST['preview'])){ // Jika user menekan tombol Preview pada form
+//                // lakukan upload file dengan memanggil function upload yang ada di SiswaModel.php
+//                $upload = $this->akm->upload_file($this->filename);
+//
+//                if($upload['result'] == "success"){ // Jika proses upload sukses
+//                    // Load plugin PHPExcel nya
+//                    include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+//
+//                    $excelreader = new PHPExcel_Reader_Excel2007();
+//                    $loadexcel = $excelreader->load('excel/'.$this->filename.'.xlsx'); // Load file yang tadi diupload ke folder excel
+//                    $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
+//
+//                    // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke file form.php
+//                    // Variabel $sheet tersebut berisi data-data yang sudah diinput di dalam excel yang sudha di upload sebelumnya
+//                    $data['sheet'] = $sheet;
+//                }else{ // Jika proses upload gagal
+//                    $data['upload_error'] = $upload['error']; // Ambil pesan error uploadnya untuk dikirim ke file form dan ditampilkan
+//                }
+//            }
+//
         }else{
             $data = [
                 'validasi' => $this->input->post('validasi'),
                 'tahun_id' => $this->input->post('tahun_id'),
-                'keterangan' => $this->input->post('keterangan'),
-                'file_valid' => $this->input->post('file_valid')
+                'no_sk' => $this->input->post('no_sk'),
+                'tgl_valid' => $this->input->post('tgl_valid')
             ];
 
 
@@ -187,6 +218,41 @@ class Akreditasi extends CI_Controller
 
     }
 
+//    public function import(){
+//        // Load plugin PHPExcel nya
+//        include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+//
+//        $excelreader = new PHPExcel_Reader_Excel2007();
+//        $loadexcel = $excelreader->load('excel/'.$this->filename.'.xlsx'); // Load file yang telah diupload ke folder excel
+//        $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
+//
+//        // Buat sebuah variabel array untuk menampung array data yg akan kita insert ke database
+//        $data = array();
+//
+//        $numrow = 1;
+//        foreach($sheet as $row){
+//            // Cek $numrow apakah lebih dari 1
+//            // Artinya karena baris pertama adalah nama-nama kolom
+//            // Jadi dilewat saja, tidak usah diimport
+//            if($numrow > 1){
+//                // Kita push (add) array data ke variabel data
+//                array_push($data, array(
+//                    'npsn'=>$row['A'], // Insert data nis dari kolom A di excel
+//                    'satuan_pendidikan'=>$row['B'], // Insert data nama dari kolom B di excel
+//                    'program'=>$row['C'], // Insert data jenis kelamin dari kolom C di excel
+//                    'Kab_Kota'=>$row['D'], // Insert data alamat dari kolom D di excel
+//                    'status_akreditasi'=>$row['E'], // Insert data alamat dari kolom D di excel
+//                ));
+//            }
+//
+//            $numrow++; // Tambah 1 setiap kali looping
+//        }
+//
+//        // Panggil fungsi insert_multiple yg telah kita buat sebelumnya di model
+//        $this->akm->insert_multiple($data);
+//
+//    }
+
     public function editvalidasi($id)
     {
         $data['title'] = 'Edit Validasi';
@@ -195,8 +261,8 @@ class Akreditasi extends CI_Controller
         $sessionid = $this->session->userdata('id');
 
         $this->form_validation->set_rules('validasi', 'validasi', 'trim|required');
-        $this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
-        $this->form_validation->set_rules('file_valid', 'file_valid', 'trim|required');
+        $this->form_validation->set_rules('no_sk', 'no_sk', 'trim|required');
+        $this->form_validation->set_rules('tgl_valid', 'tgl_valid', 'trim|required');
 
 
         if ($this->form_validation->run()==false) {
@@ -207,13 +273,13 @@ class Akreditasi extends CI_Controller
             $this->load->view('templates/footer');
         }else{
             $validasi = $this->input->post('validasi');
-            $keterangan = $this->input->post('keterangan');
-            $file = $this->input->post('file_valid');
+            $no_sk = $this->input->post('no_sk');
+            $tgl_valid = $this->input->post('tgl_valid');
 
             $data = array(
                 'validasi' => $validasi,
-                'keterangan' => $keterangan,
-                'file_valid' => $file
+                'no_sk' => $no_sk,
+                'tgl_valid' => $tgl_valid
             );
 
             $this->akm->editvalidasi($id,$data);
@@ -241,7 +307,7 @@ class Akreditasi extends CI_Controller
 
     public function hasilakreditasi()
     {
-        $data['title'] = 'Hasil Akreditasi';
+        $data['title'] = 'Hasil Validasi';
         $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

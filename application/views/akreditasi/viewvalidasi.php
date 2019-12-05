@@ -23,11 +23,11 @@
 
             <table class="table table-hover">
                 <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
+                <tr class="center">
+                    <th scope="col">NO</th>
                     <th scope="col">Validasi</th>
-                    <th scope="col">Ket</th>
-                    <th scope="col">File</th>
+                    <th scope="col">NO SK</th>
+                    <th scope="col">Tanggal Validasi</th>
                     <th scope="col">Aksi</th>
 
                 </tr>
@@ -38,11 +38,8 @@
                 <tr>
                     <th scope="row"><?= $i ;?></th>
                     <td><?= $v['validasi']; ?></td>
-                    <td><?= $v['keterangan']; ?></td>
-                    <td><?= $v['file_valid']; ?>
-
-                        <a href="" class="badge badge-pill badge-primary">download</a>
-                    </td>
+                    <td><?= $v['no_sk']; ?></td>
+                    <td><?= $v['tgl_valid']; ?> </td>
                     <td>
                         <a href="<?= base_url('akreditasi/hasilakreditasi') ;?>"class="badge badge-pill badge-warning">view</a>
                         <?php
@@ -66,6 +63,15 @@
                     <!--                    --><?php //echo $pagination; ?>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row mb-lg-2">
+        <div class="col-6">
+            <a href="<?= base_url('akreditasi/index/'.$sessionid = $this->session->userdata('id'))?>"class=" btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50"><i class="fas fa-chevron-left"></i></span>
+                <span class="text">Back</span>
+            </a>
         </div>
     </div>
 

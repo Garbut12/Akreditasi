@@ -73,7 +73,7 @@
                                 <div class="col-sm-9">
                                     <select type="text" class="form-control" id="status_penugasan" name="status_penugasan"
                                     <?php
-                                    $status_penugasan = array('bisa ditugaskan','tidak bisa ditugaskan','skor');
+                                    $status_penugasan = array('bisa ditugaskan','tidak bisa ditugaskan');
                                     ?>
                                     <select type="text" class="form-control" id="rumpun" name="rumpun">
                                         <?= '<option value="'.$asesor['status_penugasan'].'">'. $asesor['status_penugasan'].' </option>'; ?>
@@ -87,6 +87,15 @@
                                         }
                                         ?>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="keterangan" name="keterangan"
+                                           value="">
+
                                 </div>
                             </div>
 

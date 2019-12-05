@@ -16,7 +16,8 @@
                 'nama' => $this->input->post('nama'),
                 'rumpun' => $this->input->post('rumpun'),
                 'kab_kota' => $this->input->post('kab_kota'),
-                'status_penugasan' => $this->input->post('status_penugasan')
+                'status_penugasan' => $this->input->post('status_penugasan'),
+                'keterangan' => $this->input->post('keterangan')
             ];
 
             $this->db->insert('asesor', $data);
