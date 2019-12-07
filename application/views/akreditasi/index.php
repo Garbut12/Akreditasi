@@ -43,7 +43,6 @@
                 <?php foreach ($akreditasi as $tv) :?>
                     <tr>
                         <th scope="row"><?= $i ;?></th>
-<!--                        <td>--><?//= $a['tahun_valid']; ?><!--</td>-->
                         <td><?= $tv['tahun']; ?></td>
                         <td>
                             <a href="<?= base_url('akreditasi/viewvalidasi/' . $tv['id']) ;?>"class="badge badge-pill badge-warning">view</a>

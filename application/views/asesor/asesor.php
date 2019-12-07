@@ -61,10 +61,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $i= 1; ?>
-                    <?php foreach ($asesor as $a) :?>
+                    <?php $i = 0;
+                    foreach ($asesor as $a) {
+                    $i++; ?>
                         <tr>
-                            <th scope="row"><?= $i ;?></th>
+                            <th scope="row"><?= ($this->uri->segment(3)) ? $i+$this->uri->segment(3) : $i; ?></th>
                             <td><?= $a['nia']; ?></td>
                             <td><?= $a['nama']; ?></td>
                             <td><?= $a['rumpun']; ?></td>
@@ -84,14 +85,13 @@
                             }
                             ?>
                         </tr>
-                        <?php $i++ ;?>
-                    <?php endforeach; ?>
+                    <?php } ?>
                     </tbody>
                 </table>
                 <div class="row mt-3">
                     <div class="col">
                         <!--Tampilkan pagination-->
-                        <?php echo $pagination; ?>
+                        <?= isset($pagination) ? $pagination : ''; ?>
                     </div>
                 </div>
             </div>
@@ -104,8 +104,5 @@
 
 
     <!-- End of Main Content -->
+    </div>
 
-
-
-
-                    </form>

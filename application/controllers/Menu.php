@@ -8,6 +8,7 @@
             parent::__construct();
             is_logged_in();
             $this->load->model('Menu_model', 'mm');
+            $this->load->model('User_model', 'um');
         }
 
         public function index()

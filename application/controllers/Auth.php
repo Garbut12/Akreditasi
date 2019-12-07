@@ -7,6 +7,7 @@
         {
             parent::__construct();
             $this->load->library('form_validation');
+            $this->load->model('User_model', 'um');
         }
 
         public function index()

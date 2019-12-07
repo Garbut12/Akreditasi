@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2019 at 05:54 PM
+-- Generation Time: Dec 07, 2019 at 06:10 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -38,6 +38,16 @@ CREATE TABLE `akreditasi` (
   `status_akreditasi` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `akreditasi`
+--
+
+INSERT INTO `akreditasi` (`id_akreditasi`, `id_valid`, `npsn`, `satuan_pendidikan`, `program`, `Kab_Kota`, `status_akreditasi`) VALUES
+(1, 9, '11651103442', 'Taman Kanak-Kanak', 'PAUD', 'Kota Pekanbaru', 'A'),
+(2, 1, '323', 'Taman Kanak - Kanak', 'paud', 'bengkalis', 'A'),
+(3, 1, '6766767', 'hhjg', 'vjjq', 'vhh', 'kvkvj'),
+(4, 9, 'jgfjvfh', 'hxfx', 'hxd', 'hxd', 'xh');
+
 -- --------------------------------------------------------
 
 --
@@ -50,27 +60,29 @@ CREATE TABLE `asesor` (
   `nama` varchar(128) NOT NULL,
   `rumpun` varchar(128) NOT NULL,
   `kab_kota` varchar(128) NOT NULL,
-  `status_penugasan` varchar(128) NOT NULL
+  `status_penugasan` varchar(128) NOT NULL,
+  `keterangan` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `asesor`
 --
 
-INSERT INTO `asesor` (`id`, `nia`, `nama`, `rumpun`, `kab_kota`, `status_penugasan`) VALUES
-(4, 1408201910120020, 'Ayu Rahayu', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(6, 1408201910120017, 'Ervina', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(7, 1408201910120016, 'Frasanti Sundari', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(8, 1408201910120018, 'Gusmayenti', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(9, 1408201910120021, 'Ismatul Maula, M.Pd', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(10, 1408201910110002, 'Khairul Azan', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(11, 1408201910110001, 'Khairul Khazam', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(12, 1305201710123100, 'Nova Wahyuni, S.Pd.', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(13, 1408201610121596, 'Nurhaida Selian, M.Pd', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(15, 1408201710122897, 'Sri Wahyuni, M.Pd.', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(16, 1408201910120019, 'Syafrida', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(17, 1408201610121593, 'Terry Eky Yosinda, S.Si', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan'),
-(18, 1408201910310001, 'Rahayudin Manurung', 'PKBM', 'Kab. Bengkalis', 'bisa ditugaskan');
+INSERT INTO `asesor` (`id`, `nia`, `nama`, `rumpun`, `kab_kota`, `status_penugasan`, `keterangan`) VALUES
+(4, 1408201910120020, 'Ayu Rahayu', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', 'siap di tugaskan'),
+(6, 1408201910120017, 'Ervina', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(7, 1408201910120016, 'Frasanti Sundari', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(8, 1408201910120018, 'Gusmayenti', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(9, 1408201910120021, 'Ismatul Maula, M.Pd', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(10, 1408201910110002, 'Khairul Azan', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(11, 1408201910110001, 'Khairul Khazam', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(12, 1305201710123100, 'Nova Wahyuni, S.Pd.', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(13, 1408201610121596, 'Nurhaida Selian, M.Pd', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(15, 1408201710122897, 'Sri Wahyuni, M.Pd.', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(16, 1408201910120019, 'Syafrida', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(17, 1408201610121593, 'Terry Eky Yosinda, S.Si', 'PAUD', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(18, 1408201910310001, 'Rahayudin Manurung', 'PKBM', 'Kab. Bengkalis', 'bisa ditugaskan', ''),
+(19, 1403201710122216, 'Ernani Sutra, S.Sos.', 'PAUD', 'Kab. Indragiri Hilir', 'bisa ditugaskan', 'bisa ditugaskan');
 
 -- --------------------------------------------------------
 
@@ -89,7 +101,8 @@ CREATE TABLE `tahun_valid` (
 
 INSERT INTO `tahun_valid` (`id`, `tahun`) VALUES
 (4, '2016'),
-(8, '2017');
+(8, '2017'),
+(9, '2020');
 
 -- --------------------------------------------------------
 
@@ -113,7 +126,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(5, 'Muhammad Ardhiyansyah', 'muhammadardhiyansyah16@gmail.com', 'LINE_1460209483639.jpg', '$2y$10$fAzF148fJZcNSD/CuN193.f8WC7Fkp.tRyD5DnMpEEK6iWyDjlBA.', 1, 1, 1573723351),
+(5, 'Muhammad Ardhiyansyah', 'muhammadardhiyansyah16@gmail.com', 'download1.jpeg', '$2y$10$fAzF148fJZcNSD/CuN193.f8WC7Fkp.tRyD5DnMpEEK6iWyDjlBA.', 1, 1, 1573723351),
 (6, 'Reza Furnama', 'keriting@gmail.com', 'download.jpeg', '$2y$10$lfEXyrw5IVtZKo5Qiqozj.hwd7YSWcTmmZPbFTQqsaeuO0GANeyme', 2, 1, 1573786022),
 (9, 'kurniado', 'kurniado@gmail.com', '3.jpg', '$2y$10$oMvVLv0D2q2PmbPdUI6zWelfjKy.Ua/7D4A1yU578LrUU1j7N.Uw2', 2, 1, 1574352012);
 
@@ -228,19 +241,21 @@ CREATE TABLE `validasi` (
   `id` int(11) NOT NULL,
   `validasi` varchar(128) NOT NULL,
   `tahun_id` varchar(128) NOT NULL,
-  `keterangan` varchar(128) NOT NULL,
-  `file_valid` varchar(128) NOT NULL
+  `no_sk` varchar(128) NOT NULL,
+  `tgl_valid` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `validasi`
 --
 
-INSERT INTO `validasi` (`id`, `validasi`, `tahun_id`, `keterangan`, `file_valid`) VALUES
-(1, 'validasi 1', '4', 'SK 123', ''),
-(9, 'validasi 2', '4', 'sk 124', ''),
-(20, 'validasi 3', '4', 'sk 125', ''),
-(23, 'validasi 1', '8', 'sk', 'file');
+INSERT INTO `validasi` (`id`, `validasi`, `tahun_id`, `no_sk`, `tgl_valid`) VALUES
+(1, 'validasi 1', '4', 'SK 123', '2019-03-14'),
+(9, 'validasi 2', '4', 'sk 124', '2019-12-20'),
+(20, 'validasi 3', '4', 'sk 125', '2019-12-11'),
+(23, 'validasi 1', '8', 'sk', '0000-00-00'),
+(28, 'llkkl', '8', 'hkjh', '0000-00-00'),
+(29, 'validasi 3', '9', 'sk', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -308,19 +323,19 @@ ALTER TABLE `validasi`
 -- AUTO_INCREMENT for table `akreditasi`
 --
 ALTER TABLE `akreditasi`
-  MODIFY `id_akreditasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_akreditasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `asesor`
 --
 ALTER TABLE `asesor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tahun_valid`
 --
 ALTER TABLE `tahun_valid`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -356,7 +371,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `validasi`
 --
 ALTER TABLE `validasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

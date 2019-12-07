@@ -41,12 +41,7 @@
                         </div>
                     </div>
                     </div>
-
                 </div>
-
-
-
-
 
                 <table class="table table-hover">
                     <thead class="thead-dark">
@@ -61,17 +56,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!--                --><?php //$i= 1; ?>
-                    <!--                --><?php //foreach ($akreditasi as $a) :?>
-
-                    <!--                    --><?php //$i++ ;?>
-                    <!--                --><?php //endforeach; ?>
+                    <?php $i = -1;
+                    foreach ($akreditasi as $a) {
+                    $i++?>
+                    <tr>
+                        <th scope="row"><?= ($this->uri->segment(3)) ? $i+$this->uri->segment(3) : $i; ?></th>
+                        <td><?= $a['npsn']; ?></td>
+                        <td><?= $a['satuan_pendidikan']; ?></td>
+                        <td><?= $a['program']; ?></td>
+                        <td><?= $a['Kab_Kota']; ?></td>
+                        <td><?= $a['status_akreditasi']; ?></td>
+                    </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
                 <div class="row mt-3">
                     <div class="col">
                         <!--Tampilkan pagination-->
-                        <!--                    --><?php //echo $pagination; ?>
+                        <?= isset($pagination) ? $pagination : ''; ?>
                     </div>
                 </div>
             </div>

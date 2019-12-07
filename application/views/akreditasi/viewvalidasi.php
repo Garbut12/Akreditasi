@@ -33,19 +33,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                                <?php $i= 1; ?>
-                                <?php foreach ($akreditasi as $v) :?>
+                <?php $i= 1; ?>
+                <?php foreach ($akreditasi as $v) :?>
                 <tr>
                     <th scope="row"><?= $i ;?></th>
                     <td><?= $v['validasi']; ?></td>
                     <td><?= $v['no_sk']; ?></td>
                     <td><?= $v['tgl_valid']; ?> </td>
                     <td>
-                        <a href="<?= base_url('akreditasi/hasilakreditasi') ;?>"class="badge badge-pill badge-warning">view</a>
+                        <a href="<?= base_url('akreditasi/hasilakreditasi/'. $v['id'] );?>"class="badge badge-pill badge-warning">view</a>
                         <?php
                         if ($this->session->userdata('role_id') == 1) {
                             ?>
-
                         <a href="<?= base_url('akreditasi/editvalidasi/' . $v['id']) ;?>"class="badge badge-pill badge-success">edit</a>
                         <a href="<?= base_url('akreditasi/deleteValidasi/' . $v['id']) ;?>"class="badge badge-pill badge-danger"onclick="return confirm('Yakin Hapus?')">delete</a>
                             <?php
@@ -57,12 +56,6 @@
                                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <div class="row mt-3">
-                <div class="col">
-                    <!--Tampilkan pagination-->
-                    <!--                    --><?php //echo $pagination; ?>
-                </div>
-            </div>
         </div>
     </div>
 

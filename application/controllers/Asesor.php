@@ -12,6 +12,7 @@ class Asesor extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Asesor_model', 'am');
+        $this->load->model('User_model', 'um');
         $this->load->library('pagination');
     }
 
@@ -45,17 +46,17 @@ class Asesor extends CI_Controller
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
-
         $this->pagination->initialize($config);
+
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model.
 
-
-        $data['pagination'] = $this->pagination->create_links();
         $data['title'] = 'Asesor';
-        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
-        $data['asesor']=  $this->am->getAsesor($config["per_page"], $data['page']);
+        $data['user'] = $this->um->getuser();
+        $data['asesor']=  $this->am->getAllAsesor($config["per_page"], $data['page']);
+        $data['pagination'] = $this->pagination->create_links();
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -66,7 +67,7 @@ class Asesor extends CI_Controller
     public function AddAsesor()
     {
         $data['title']=' Add New Asesor ';
-        $data['user'] =$data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
 
         $this->form_validation->set_rules('nia', 'nia', 'trim|required|is_unique[asesor.nia]',
         array(
@@ -83,6 +84,7 @@ class Asesor extends CI_Controller
             $this->load->view('templates/topbar', $data);
             $this->load->view('asesor/addasesor', $data);
             $this->load->view('templates/footer');
+
         }else{
             $data = [
                 'nia' => htmlspecialchars($this->input->post('nia')),
@@ -120,7 +122,7 @@ class Asesor extends CI_Controller
     public function editAsesor($id)
     {
         $data['title'] = 'Edit Asesor';
-        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
         $data['asesor'] = $this->am->getDetailAsesor($id);
 
         $this->form_validation->set_rules('nia', 'nia', 'trim|required');
@@ -180,24 +182,24 @@ class Asesor extends CI_Controller
         $this->form_validation->set_rules('keywordNama', 'keywordNama', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger role="alert">Terjadi kesalahan mencari user</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger role="alert">Terjadi kesalahan mencari asesor</div>');
             redirect('asesor/asesor');
         } else {
-            $nama = htmlspecialchars($this->input->post('keywordNama'));
-            $datas = $this->am->searchUser($nama);
+            $keyword = htmlspecialchars($this->input->post('keywordNama'));
+            $datas = $this->am->searchAsesor($keyword);
 
             if ($datas) {
                 $data['user'] = $datas;
-                $data['title'] = "Data Asesor";
-
-
+                $data['title'] = "Asesor";
+                $data['asesor'] = $datas;
+                $data['user'] = $this->um->getuser();
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar', $data);
-                $this->load->view('templates/topbar');
-                $this->load->view('asesor/asesor');
-                $this->load->view('templates/footer');
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('asesor/asesor', $data);
+                $this->load->view('templates/footer',);
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kesalahan mencari user</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kesalahan mencari asesor</div>');
                 redirect('asesor/asesor');
             }
         }

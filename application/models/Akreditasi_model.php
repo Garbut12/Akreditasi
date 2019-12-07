@@ -101,4 +101,17 @@ class Akreditasi_model extends CI_Model
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 
+    public function getHasilValidasi($id)
+    {
+        $query = "SELECT * FROM `akreditasi` 
+                    WHERE `id_valid` =$id ";
+        return $this->db->query($query)->result_array();
+    }
+
+    public function getAllHasilValid($limit, $start)
+    {
+        $data = $this->db->get('akreditasi',  $limit, $start);
+        return $data->result_array();
+    }
+
 }

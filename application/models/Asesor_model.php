@@ -8,6 +8,10 @@
             return $query->result_array();
         }
 
+        public function getAllAsesor($limit, $start){
+            $data = $this->db->get('asesor',  $limit, $start);
+            return $data->result_array();
+        }
         public function AddAsesor()
         {
 
@@ -47,10 +51,14 @@
         {
             $this->db->SELECT('*');
             $this->db->FROM('asesor');
-            $this->db->LIKE('name', $keyword);
+            $this->db->LIKE('nama', $keyword);
+            $this->db->OR_LIKE('nia', $keyword);
+            $this->db->OR_LIKE('kab_kota', $keyword);
 
             $data = $this->db->get();
             return $data->result_array();
         }
+
+
 
     }

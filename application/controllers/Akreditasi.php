@@ -14,13 +14,15 @@ class Akreditasi extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Akreditasi_model', 'akm');
+        $this->load->model('User_model', 'um');
+        $this->load->library('pagination');
     }
 
 
     public function index()
     {
         $data['title'] = 'TerAkreditasi';
-        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
 
         $data['akreditasi']=  $this->akm->tahunValid();
 
@@ -34,7 +36,7 @@ class Akreditasi extends CI_Controller
     public function addtahun()
     {
         $data['title']= 'Add Tahun Validasi';
-        $data['user'] =$data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
 
         $this->form_validation->set_rules('tahun', 'tahun', 'trim|required|is_unique[tahun_valid.tahun]',
             array(
@@ -78,7 +80,7 @@ class Akreditasi extends CI_Controller
     public function editTahun($id)
     {
         $data['title'] = 'Edit Tahun';
-        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
         $data['akreditasi'] = $this->akm->getDetailTahun($id);
 
         $this->form_validation->set_rules('tahun', 'tahun', 'trim|required|is_unique[tahun_valid.tahun]',
@@ -121,7 +123,7 @@ class Akreditasi extends CI_Controller
     public function viewvalidasi($id)
     {
         $data['title'] = 'Validasi';
-        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
 
         $data['akreditasi']=  $this->akm->validasi($id);
 
@@ -142,7 +144,7 @@ class Akreditasi extends CI_Controller
 
 
         $data['title']= 'Add  Validasi';
-        $data['user'] =$data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
 
         $data['get_tahun'] = $this->akm->tahunValid();
 
@@ -256,7 +258,7 @@ class Akreditasi extends CI_Controller
     public function editvalidasi($id)
     {
         $data['title'] = 'Edit Validasi';
-        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
         $data['validasi'] = $this->akm->getdetailvalid($id);
         $sessionid = $this->session->userdata('id');
 
@@ -305,16 +307,100 @@ class Akreditasi extends CI_Controller
         }
     }
 
-    public function hasilakreditasi()
+    public function hasilakreditasi($id)
     {
+        //konfigurasi pagination
+        $config['base_url'] = site_url('akreditasi/hasilakreditasi'); //site url
+        $config['total_rows'] = $this->db->count_all('akreditasi'); //total row
+        $config['per_page'] = 10;  //show record per halaman
+        $config["uri_segment"] = 3;  // uri parameter
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = floor($choice);
+
+        // Membuat Style pagination untuk BootStrap v4
+        $config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+        $this->pagination->initialize($config);
+
+        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model.
+
+
         $data['title'] = 'Hasil Validasi';
-        $data['user'] = $this->db->get_where('user', array('email' => $this->session->userdata('email')))->row_array();
+        $data['user'] = $this->um->getuser();
+        $data['akreditasi']=  $this->akm->getHasilValidasi($id);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('akreditasi/hasilakreditasi', $data);
         $this->load->view('templates/footer');
     }
+
+//    public function hasilakreditasi()
+//    {
+//        //konfigurasi pagination
+//        $config['base_url'] = site_url('akreditasi/hasilakreditasi'); //site url
+//        $config['total_rows'] = $this->db->count_all('akreditasi'); //total row
+//        $config['per_page'] = 10;  //show record per halaman
+//        $config["uri_segment"] = 3;  // uri parameter
+//        $choice = $config["total_rows"] / $config["per_page"];
+//        $config["num_links"] = floor($choice);
+//
+//        // Membuat Style pagination untuk BootStrap v4
+//        $config['first_link']       = 'First';
+//        $config['last_link']        = 'Last';
+//        $config['next_link']        = 'Next';
+//        $config['prev_link']        = 'Prev';
+//        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+//        $config['full_tag_close']   = '</ul></nav></div>';
+//        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+//        $config['num_tag_close']    = '</span></li>';
+//        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+//        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+//        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+//        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+//        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+//        $config['prev_tagl_close']  = '</span>Next</li>';
+//        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+//        $config['first_tagl_close'] = '</span></li>';
+//        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+//        $config['last_tagl_close']  = '</span></li>';
+//        $this->pagination->initialize($config);
+//
+//        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+//
+//        //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model.
+//
+//        $data['title'] = 'Hasil Validasi';
+//        $data['user'] = $this->um->getuser();
+//        $data['akreditasi']=  $this->akm->getHasilValidasi($config["per_page"], $data['page']);
+//        $data['pagination'] = $this->pagination->create_links();
+//
+//        $this->load->view('templates/header', $data);
+//        $this->load->view('templates/sidebar', $data);
+//        $this->load->view('templates/topbar', $data);
+//        $this->load->view('akreditasi/hasilakreditasi', $data);
+//        $this->load->view('templates/footer');
+//    }
+
+
 
 
 }
