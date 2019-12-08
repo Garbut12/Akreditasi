@@ -345,7 +345,9 @@ class Akreditasi extends CI_Controller
 
         $data['title'] = 'Hasil Validasi';
         $data['user'] = $this->um->getuser();
-        $data['akreditasi']=  $this->akm->getHasilValidasi($id);
+        $data['akreditasi']=  $this->akm->getHasilValidasi($id,$config["per_page"], $data['page']);
+
+        $data['pagination'] = $this->pagination->create_links();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

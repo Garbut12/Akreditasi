@@ -10,6 +10,9 @@
     <div class="row">
 
         <div class="col-lg-8">
+            <?= form_error('asesor','
+                        <div class="alert alert-danger" role="alert">',
+                '</div>');?>
 
             <?= form_open_multipart('user/edit'); ?>
 

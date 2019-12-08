@@ -114,11 +114,12 @@
                     'image' => 'default.png',
                     'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                     'role_id' => 2,
-                    'is_active' => 1,
+                    'is_active' => 0,
                     'date_created' => time()
                 );
 
                 $this->db->insert('user', $data);
+
                 $this->session->set_flashdata('message',
                     '<div class="alert alert-success" role="alert">
                           Congrulatulation your account  hass been crated, please Login !!
@@ -127,6 +128,8 @@
             }
 
         }
+
+
 
         public function logout()
         {

@@ -54,7 +54,7 @@ class Asesor extends CI_Controller
 
         $data['title'] = 'Asesor';
         $data['user'] = $this->um->getuser();
-        $data['asesor']=  $this->am->getAllAsesor($config["per_page"], $data['page']);
+        $data['asesor']=  $this->am->getAsesor($config["per_page"], $data['page']);
         $data['pagination'] = $this->pagination->create_links();
 
         $this->load->view('templates/header', $data);
@@ -182,7 +182,7 @@ class Asesor extends CI_Controller
         $this->form_validation->set_rules('keywordNama', 'keywordNama', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger role="alert">Terjadi kesalahan mencari asesor</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger role="alert">Terjadi kesalahan mencari data history</div>');
             redirect('asesor/asesor');
         } else {
             $keyword = htmlspecialchars($this->input->post('keywordNama'));

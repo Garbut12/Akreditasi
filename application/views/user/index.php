@@ -7,7 +7,10 @@
             <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
             <div class="row">
-                <div class="col-lg-8">
+                    <div class="col-lg-8">
+                        <?= form_error('asesor','
+                        <div class="alert alert-danger" role="alert">',
+                            '</div>');?>
                     <?= $this->session->flashdata('message'); ?>
                 </div>
             </div>

@@ -13,6 +13,7 @@
                                 <div class="col-lg">
                                     <div class="p-5">
                                         <div class="text-center">
+                                            <img src="./assets/img/gambarban paud.png" width="150px" >
                                             <h1 class="h4 text-gray-900 mb-4">Login</h1>
 
                                             <?= $this->session->flashdata('message'); ?>

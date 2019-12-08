@@ -6,7 +6,8 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fab fa-steam"></i>
+                <img src="./assets/img/gambarban paud.png" width="60px" >
+
             </div>
             <div class="sidebar-brand-text mx-3">Akreditasi</div>
         </a>

@@ -23,7 +23,12 @@
 
                 <div class="row mb-lg-2">
                     <div class="col-4">
+                        <?php
+                        if ($this->session->userdata('role_id') == 1) {
+                        ?>
                     <a href="" class="btn btn-info waves-effect waves-light btn-purple m-b-5" style="margin-left: 10px"> <i class="fa fa-upload m-r-10"></i> <span>import</span> </a>
+                        <?php }
+                        ?>
 
                     <a href="" class="btn btn-info waves-effect waves-light btn-purple m-b-5" style="margin-left: 10px"> <i class="fa fa-upload m-r-10"></i> <span>Download</span> </a>
                     </div>
@@ -56,9 +61,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $i = -1;
+                    <?php $i = 1;
                     foreach ($akreditasi as $a) {
-                    $i++?>
+                   ?>
                     <tr>
                         <th scope="row"><?= ($this->uri->segment(3)) ? $i+$this->uri->segment(3) : $i; ?></th>
                         <td><?= $a['npsn']; ?></td>
@@ -67,7 +72,9 @@
                         <td><?= $a['Kab_Kota']; ?></td>
                         <td><?= $a['status_akreditasi']; ?></td>
                     </tr>
+
                     <?php } ?>
+                    <?php  $i++?>
                     </tbody>
                 </table>
                 <div class="row mt-3">

@@ -17,7 +17,13 @@
 
 
             <?= $this->session->flashdata('message') ;?>
+            <?php
+
+            if ($this->session->userdata('role_id') == 1) {
+            ?>
             <a href="<?= base_url('akreditasi/addvalidasi'); ?>" class="btn btn-primary mb-3 " >Add New Validasi </a>
+            <?php }
+            ?>
 
 
 

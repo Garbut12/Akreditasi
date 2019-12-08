@@ -3,15 +3,12 @@
 
     class Asesor_model extends CI_Model
     {
-        public function getAsesor(){
-            $query = $this->db->get('asesor');
+        public function getAsesor($limit, $start){
+            $query = $this->db->get('asesor',$limit, $start);
             return $query->result_array();
         }
 
-        public function getAllAsesor($limit, $start){
-            $data = $this->db->get('asesor',  $limit, $start);
-            return $data->result_array();
-        }
+
         public function AddAsesor()
         {
 
