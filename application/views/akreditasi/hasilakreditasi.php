@@ -61,7 +61,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $i = 1;
+                    <?php $i = 0;
                     foreach ($akreditasi as $a) {
                    ?>
                     <tr>

@@ -101,13 +101,15 @@ class Akreditasi_model extends CI_Model
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 
-    public function getHasilValidasi($id,$limit, $start)
+    public function getHasilValidasi($id, $limit = null, $start = null)
     {
-        $data = $this->db->select('*')
-            ->from('akreditasi')
-            ->where('id_valid', $id)
-            ->limit($limit,$start)
-            ->get();
+//        $data = $this->db->select('*')
+//            ->from('akreditasi')
+//            ->where('id_valid', $id)
+//            ->limit($limit,$start)
+//            ->get();
+
+        $data = $this->db->get_where('akreditasi', array('id_valid' => $id), $limit, $start);
         return $data->result_array();
 //
 //        $query = "SELECT * FROM `akreditasi`

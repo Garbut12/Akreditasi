@@ -52,7 +52,7 @@
                         if ($this->session->userdata('role_id') == 1) {
                             ?>
                         <a href="<?= base_url('akreditasi/editvalidasi/' . $v['id']) ;?>"class="badge badge-pill badge-success">edit</a>
-                        <a href="<?= base_url('akreditasi/deleteValidasi/' . $v['id']) ;?>"class="badge badge-pill badge-danger"onclick="return confirm('Yakin Hapus?')">delete</a>
+                        <a href="<?= base_url('akreditasi/deleteValidasi/' . $v['id']) ;?>"class="badge badge-pill badge-danger" onclick="return confirm('Yakin Hapus?')">delete</a>
                             <?php
                         }
                         ?>

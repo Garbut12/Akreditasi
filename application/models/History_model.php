@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class History_model extends CI_Model
 {
-    public function getHistory($limit, $start)
+    public function getHistory($limit=null, $start=null)
     {
 
 

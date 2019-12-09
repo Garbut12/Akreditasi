@@ -13,9 +13,10 @@
                                 <div class="col-lg">
                                     <div class="p-5">
                                         <div class="text-center">
-                                            <img src="./assets/img/gambarban paud.png" width="150px" >
-                                            <h1 class="h4 text-gray-900 mb-4">Login</h1>
-
+                                            <img src="./assets/img/gambarban_paud.png" width="150px" >
+                                            <div class="mt-3">
+                                            <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
+                                            </div>
                                             <?= $this->session->flashdata('message'); ?>
 
                                         </div>
@@ -34,9 +35,6 @@
                                             </button>
                                         </form>
                                         <hr>
-                                        <div class="text-center">
-                                            <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                        </div>
                                         <div class="text-center">
                                             <a class="small" href="<?= base_url('auth/registration');?>">Create an Account!</a>
                                         </div>

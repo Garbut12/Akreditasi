@@ -307,12 +307,12 @@ class Akreditasi extends CI_Controller
         }
     }
 
-    public function hasilakreditasi($id)
+    public function hasilakreditasi()
     {
         //konfigurasi pagination
         $config['base_url'] = site_url('akreditasi/hasilakreditasi'); //site url
         $config['total_rows'] = $this->db->count_all('akreditasi'); //total row
-        $config['per_page'] = 10;  //show record per halaman
+        $config['per_page'] = 2;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = floor($choice);
@@ -339,13 +339,18 @@ class Akreditasi extends CI_Controller
         $this->pagination->initialize($config);
 
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+//
+//        //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model.
 
-        //panggil function get_mahasiswa_list yang ada pada mmodel mahasiswa_model.
-
+        $id_valid = $this->session->userdata('id_valid');
 
         $data['title'] = 'Hasil Validasi';
         $data['user'] = $this->um->getuser();
-        $data['akreditasi']=  $this->akm->getHasilValidasi($id,$config["per_page"], $data['page']);
+        $data['akreditasi']=  $this->akm->getHasilValidasi($id_valid, $config["per_page"], $data['page']);
+//        $data['akreditasi'] = $this->akm->getHasilValidasi($id);
+
+//        var_dump($data['akreditasi']);
+//        die;
 
         $data['pagination'] = $this->pagination->create_links();
         $this->load->view('templates/header', $data);

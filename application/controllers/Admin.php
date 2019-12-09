@@ -11,24 +11,33 @@
         {
             parent::__construct();
             is_logged_in();
-            $this->load->model('User_model', 'um');
+            $this->load->model('Admin_model', 'am');
+            $this->load->model('History_model', 'hm');
         }
 
-        public function index()
+        public function index($id=null)
         {
             $data['title'] = 'Dashboard';
-            $data['user'] = $this->um->getuser();
+            $data['user'] = $this->am->getuser();
+            $data['asesor'] = $this->am->getAsesor();
+            $data['tahun'] = $this->am->getTahun();
+            $data['validasi'] = $this->am->getValidasi();
+            $data['hasilvalidasi'] = $this->am->getHasilValidasi();
+
+
+
+            $sessionid = $this->session->userdata('id');
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('admin/index', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/footer',$data);
         }
 
         public function role()
         {
             $data['title'] = 'Role';
-            $data['user'] = $this->um->getuser();
+            $data['user'] = $this->am->getuser();
 
             $data['role'] = $this->db->get('user_role')->result_array();
             $this->load->view('templates/header', $data);
@@ -41,7 +50,7 @@
         public function roleAccess($role_id)
         {
             $data['title'] = 'Role Access';
-            $data['user'] = $this->um->getuser();
+            $data['user'] = $this->am->getuser();
             $data['role'] = $this->db->get_where('user_role',['id' => $role_id])->row_array();
 
             $this->db->where('id !=',  1);
@@ -79,6 +88,8 @@
                        Access Change !!!
                  </div>');
         }
+
+
 
 
     }

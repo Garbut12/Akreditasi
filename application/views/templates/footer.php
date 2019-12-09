@@ -48,6 +48,17 @@
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="<?= base_url('assets'); ?>/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<?= base_url('assets'); ?>/js/demo/chart-area-demo.js"></script>
+    <script src="<?= base_url('assets'); ?>/js/demo/chart-pie-demo.js"></script>
+    <script src="<?= base_url('assets'); ?>/js/demo/chart-bar-demo.js"></script>
+    <script src="<?= base_url('assets'); ?>/js/demo/datatables-demo.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
     <script>
 
         $('.custom-file-input').on('change', function () {
@@ -72,6 +83,54 @@
                 }
             });
         });
+
+    </script>
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+
+        //ambil data
+
+        var asesor = <?php echo $asesor;?>;
+        var surat_masuk_belum_disposisi = <?php echo $surat_masuk_belum_disposisi;?>;
+
+        // Pie Chart Example
+        var ctx = document.getElementById("surat_disposisi_tu");
+        var surat_disposisi_tu = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["asesor", "Belum Didisposisi"],
+                datasets: [{
+                    data: [asesor, surat_masuk_belum_disposisi],
+                    backgroundColor: ['#4e73df', '#f6c23e', '#36b9cc'],
+                    hoverBackgroundColor: ['#2e59d9', '#f6b20b', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+
+    </script>
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
 
     </script>
 
