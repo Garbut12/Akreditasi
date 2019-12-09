@@ -39,11 +39,13 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">NPSN</th>
+                        <th scope="col">Nama Lembaga</th>
                         <th scope="col">Satuan Pendidikan</th>
                         <th scope="col">Program</th>
                         <th scope="col">Kabupaten/Kota</th>
                         <th scope="col">Status Akreditasi</th>
                         <th scope="col">Validasi</th>
+                        <th scope="col">Tanggal Validasi</th>
                         <th scope="col">No SK</th>
                         <th scope="col">Tahun</th>
                     </tr>
@@ -54,11 +56,13 @@
                     <tr>
                         <th scope="row"><?= ($this->uri->segment(3)) ? $i+$this->uri->segment(3) : $i; ?> </th>
                         <td><?= $h['npsn']; ?></td>
+                        <td><?= $h['nama_lembaga']; ?></td>
                         <td><?= $h['satuan_pendidikan']; ?></td>
                         <td><?= $h['program']; ?></td>
                         <td><?= $h['Kab_Kota']; ?></td>
                         <td><?= $h['status_akreditasi']; ?></td>
                         <td><?= $h['validasi']; ?></td>
+                        <td><?= $h['tgl_valid']; ?></td>
                         <td><?= $h['no_sk']; ?></td>
                         <td><?= $h['tahun']; ?></td>
                     </tr>

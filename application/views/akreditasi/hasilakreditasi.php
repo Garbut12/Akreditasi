@@ -21,20 +21,27 @@
 
 
 
-                <div class="row mb-lg-2">
+                <div class="row mb-lg-3">
                     <div class="col-4">
                         <?php
                         if ($this->session->userdata('role_id') == 1) {
                         ?>
+                            <div class="input-group">
+                                <input name="keywordNama" id="keywordNama" autocomplete="off" type="text" class="w-50 form-control" placeholder="Cari Lembaga" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit" id="tombolCariLembaga">Cari</button>
+                                </div>
+
                     <a href="" class="btn btn-info waves-effect waves-light btn-purple m-b-5" style="margin-left: 10px"> <i class="fa fa-upload m-r-10"></i> <span>import</span> </a>
+                            </div>
                         <?php }
                         ?>
 
-                    <a href="" class="btn btn-info waves-effect waves-light btn-purple m-b-5" style="margin-left: 10px"> <i class="fa fa-upload m-r-10"></i> <span>Download</span> </a>
+                    <a href="" class="btn btn-info waves-effect waves-light btn-purple m-b-8" style="margin-left: 10px"> <i class="fa fa-upload m-r-10"></i> <span>Download</span> </a>
                     </div>
                     <div class="col-8">
                     <div class="fa-pull-right">
-                        <div class="col-12">
+                        <div class="col">
                             <form action="http://localhost/Akreditasi/asesor/searchAsesor" method="post">
                                 <div class="input-group">
                                     <input name="keywordNama" id="keywordNama" autocomplete="off" type="text" class="w-50 form-control" placeholder="Cari Lembaga" required>
